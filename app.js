@@ -40,7 +40,7 @@ function getRandomPhraseAsArray(arr) {
 // Display the random phrase
 function addPhraseToDisplay(arr) {
     const phrasesArray = getRandomPhraseAsArray(arr);
-    for (let i = 0; i < phrasesArray.length; i+= 1) {
+    for (let i = 0; i < phrasesArray.length; i += 1) {
         let character = phrasesArray[i];
         const li = document.createElement('li');
         li.textContent = character;
@@ -55,7 +55,8 @@ function addPhraseToDisplay(arr) {
 
 // Check letters to random phrase chosen
 function checkLetter(button) {
-
+    let currentCharacters = document.querySelector('.letter');
+    let match = null;
 }
 
 // Keyboard button listener
