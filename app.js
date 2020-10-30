@@ -53,15 +53,23 @@ function addPhraseToDisplay(arr) {
     }
 }
 
-getRandomPhraseAsQuestion(phrases);
-addPhraseToDisplay(phrases);
-
 // Check letters to random phrase chosen
 function checkLetter(button) {
 
 }
 
+// Keyboard button listener
+
+qwerty.addEventListener('click', (e) => {
+    if (e.target.tagName === 'BUTTON') {
+
+    }
+});
+
 // Check if player got the phrase correct
 function checkWin() {
 
 }
+
+getRandomPhraseAsQuestion(phrases);
+addPhraseToDisplay(phrases);
