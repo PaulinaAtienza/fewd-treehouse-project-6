@@ -55,21 +55,42 @@ function addPhraseToDisplay(arr) {
 
 // Check letters to random phrase chosen
 function checkLetter(button) {
-    let currentCharacters = document.querySelector('.letter');
+    let list = document.getElementsByClassName('letter');
     let match = null;
+    for (let i = 0; i < list.length; i += 1) {
+        let letter = list[i];
+        let letterCheck = letter.textContent.toLowerCase();
+        if (letterCheck === button) {
+            letter.classList.add('show');
+            match = true;
+        }
+    }
+    return match;
 }
 
 // Keyboard button listener
-
 qwerty.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
-
+        const button = e.target;
+        button.classList.add('chosen');
+        checkLetter(button.textContent);
+        let letterFound = '';
+        if (letterFound === null) {
+            missed += 1;
+        }
     }
+    checkWin();
 });
 
 // Check if player got the phrase correct
 function checkWin() {
-
+    const phraseLetter = document.getElementsByClassName('letter');
+    const correctLetter = document.getElementsByClassName('show');
+    if (phraseLetter.length === correctLetter.length) {
+        overlay.className('win');
+    } else {
+        overlay.className('lose');
+    }
 }
 
 getRandomPhraseAsQuestion(phrases);
