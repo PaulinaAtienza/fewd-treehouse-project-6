@@ -4,6 +4,7 @@ const ul = phrase.querySelector('ul')
 const startButton = document.getElementsByClassName('btn__reset');
 const overlay = document.getElementById('overlay');
 const heading = document.getElementById('banner');
+let lives = document.getElementsByTagName('img');
 let missed = 0;
 
 const phrases = [
@@ -73,10 +74,13 @@ qwerty.addEventListener('click', (e) => {
     if (e.target.tagName === 'BUTTON') {
         const button = e.target;
         button.classList.add('chosen');
-        checkLetter(button.textContent);
-        let letterFound = '';
+        if (button.className === 'chosen') {
+            button.disabled = 'true';
+        }
+        let letterFound = checkLetter(button.textContent);
         if (letterFound === null) {
             missed += 1;
+            lives[missed - 1].style.display = 'none';
         }
     }
     checkWin();
@@ -87,9 +91,11 @@ function checkWin() {
     const phraseLetter = document.getElementsByClassName('letter');
     const correctLetter = document.getElementsByClassName('show');
     if (phraseLetter.length === correctLetter.length) {
-        overlay.className('win');
-    } else {
-        overlay.className('lose');
+        overlay.className = 'win';
+        overlay.style.display = 'flex';
+    } else if (missed > 4) {
+        overlay.className = 'lose';
+        overlay.style.display = 'flex';
     }
 }
 
