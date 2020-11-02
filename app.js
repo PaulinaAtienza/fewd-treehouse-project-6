@@ -87,8 +87,20 @@ qwerty.addEventListener('click', (e) => {
 });
 
 // Add reset button to success and failure screens
+// Remove question, phrase, chosen buttons, and lost hearts from screen
 function reset() {
     overlay.children[1].text = 'Play Again?'
+    question = document.getElementsByTagName('h3')[0];
+    question.textContent = '';
+    let ul = phrase.firstElementChild;
+    ul.innerHTML = '';
+    const button = document.getElementsByTagName('button');
+        for (let i = 0; i < button.length; i += i) {
+            if (button.className === 'chosen') {
+                button.classList.remove('chosen');
+            }
+        }
+
     missed = 0;
 }
 
