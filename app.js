@@ -90,9 +90,6 @@ qwerty.addEventListener('click', (e) => {
 function reset() {
     overlay.children[1].text = 'Play Again?'
     missed = 0;
-    questionHeading.remove();
-    getRandomPhraseAsQuestion(phrases);
-    addPhraseToDisplay(phrases);
 }
 
 // Check if player got the phrase correct
