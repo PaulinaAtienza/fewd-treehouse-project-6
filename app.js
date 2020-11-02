@@ -94,14 +94,13 @@ function reset() {
     question.textContent = '';
     let ul = phrase.firstElementChild;
     ul.innerHTML = '';
-    const button = document.getElementsByTagName('button');
-        for (let i = 0; i < button.length; i += i) {
-            if (button.className === 'chosen') {
-                button.classList.remove('chosen');
-            }
+    const keyboard = document.getElementsByTagName('button');
+    for (let i = 0; i < keyboard.length; i += 1) {
+        let key = keyboard[i];
+        if (key.className === 'chosen') {
+            key.classList.remove('chosen');
         }
-
-    missed = 0;
+    }
 }
 
 // Check if player got the phrase correct
