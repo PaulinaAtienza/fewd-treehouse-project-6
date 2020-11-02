@@ -80,11 +80,20 @@ qwerty.addEventListener('click', (e) => {
         let letterFound = checkLetter(button.textContent);
         if (letterFound === null) {
             missed += 1;
-            lives[missed - 1].style.display = 'none';
+            lives[missed - 1].setAttribute('src', 'images/lostHeart.png');
         }
     }
     checkWin();
 });
+
+// Add reset button to success and failure screens
+function reset() {
+    overlay.children[1].text = 'Play Again?'
+    missed = 0;
+    questionHeading.remove();
+    getRandomPhraseAsQuestion(phrases);
+    addPhraseToDisplay(phrases);
+}
 
 // Check if player got the phrase correct
 function checkWin() {
@@ -92,10 +101,14 @@ function checkWin() {
     const correctLetter = document.getElementsByClassName('show');
     if (phraseLetter.length === correctLetter.length) {
         overlay.className = 'win';
+        overlay.firstElementChild.innerHTML = 'Congratulations! You win!'
         overlay.style.display = 'flex';
+        reset();
     } else if (missed > 4) {
         overlay.className = 'lose';
+        overlay.firstElementChild.innerHTML = `Sorry, the correct answer was "${phrases[questionNumber][1]}"`
         overlay.style.display = 'flex';
+        reset();
     }
 }
 
