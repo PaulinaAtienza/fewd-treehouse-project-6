@@ -15,7 +15,12 @@ const phrases = [
     ['Where is the best place to learn front-end web development?', 'Treehouse']
 ]
 
-const questionNumber = Math.floor(Math.random() * phrases.length);
+function getRandomNumber(arr) {
+    return Math.floor(Math.random() * arr.length);
+}
+
+getRandomNumber(phrases);
+const randomNumber = getRandomNumber(phrases);
 
 // Start game button listener
 overlay.addEventListener('click', (e) => {
@@ -25,7 +30,7 @@ overlay.addEventListener('click', (e) => {
 });
 
 // Choose random array and display question
-function getRandomPhraseAsQuestion(arr) {
+function getRandomPhraseAsQuestion(arr, questionNumber) {
     const question = arr[questionNumber][0];
     const questionHeading = document.createElement('h3');
     questionHeading.textContent = question;
@@ -33,13 +38,13 @@ function getRandomPhraseAsQuestion(arr) {
 }
 
 // Choose random array and split into array of letters
-function getRandomPhraseAsArray(arr) {
+function getRandomPhraseAsArray(arr, questionNumber) {
     const splitPhrase = arr[questionNumber][1].split('');
     return splitPhrase;
 }
 
-getRandomPhraseAsQuestion(phrases);
-getRandomPhraseAsArray(phrases);
+getRandomPhraseAsQuestion(phrases, randomNumber);
+getRandomPhraseAsArray(phrases, randomNumber);
 
 // Display the random phrase
 function addPhraseToDisplay(arr) {
@@ -56,7 +61,7 @@ function addPhraseToDisplay(arr) {
     }
 }
 
-const phraseArray = getRandomPhraseAsArray(phrases);
+const phraseArray = getRandomPhraseAsArray(phrases, randomNumber);
 addPhraseToDisplay(phraseArray);
 
 // Check letters to random phrase chosen
@@ -116,6 +121,11 @@ function reset() {
         }
     }
     missed = 0;
+    getRandomNumber(phrases);
+    const randomNumber = getRandomNumber(phrases);
+    getRandomPhraseAsQuestion(phrases, randomNumber);
+    getRandomPhraseAsArray(phrases, randomNumber);
+    const phraseArray = getRandomPhraseAsArray(phrases, randomNumber);
     addPhraseToDisplay(phraseArray);
 }
 
@@ -125,12 +135,12 @@ function checkWin() {
     const correctLetter = document.getElementsByClassName('show');
     if (phraseLetter.length === correctLetter.length) {
         overlay.className = 'win';
-        overlay.firstElementChild.innerHTML = 'Congratulations! You win!'
+        overlay.firstElementChild.innerHTML = 'Congratulations, you win!'
         overlay.style.display = 'flex';
         reset();
     } else if (missed > 4) {
         overlay.className = 'lose';
-        overlay.firstElementChild.innerHTML = `Sorry, the correct answer was "${phrases[questionNumber][1]}"`
+        overlay.firstElementChild.innerHTML = 'Sorry, that is incorrect.'
         overlay.style.display = 'flex';
         reset();
     }
