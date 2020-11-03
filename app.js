@@ -38,11 +38,13 @@ function getRandomPhraseAsArray(arr) {
     return splitPhrase;
 }
 
+getRandomPhraseAsQuestion(phrases);
+getRandomPhraseAsArray(phrases);
+
 // Display the random phrase
 function addPhraseToDisplay(arr) {
-    const phrasesArray = getRandomPhraseAsArray(arr);
-    for (let i = 0; i < phrasesArray.length; i += 1) {
-        let character = phrasesArray[i];
+    for (let i = 0; i < arr.length; i += 1) {
+        let character = arr[i];
         const li = document.createElement('li');
         li.textContent = character;
         ul.append(li);
@@ -53,6 +55,9 @@ function addPhraseToDisplay(arr) {
         }
     }
 }
+
+const phraseArray = getRandomPhraseAsArray(phrases);
+addPhraseToDisplay(phraseArray);
 
 // Check letters to random phrase chosen
 function checkLetter(button) {
@@ -90,17 +95,28 @@ qwerty.addEventListener('click', (e) => {
 // Remove question, phrase, chosen buttons, and lost hearts from screen
 function reset() {
     overlay.children[1].text = 'Play Again?'
-    question = document.getElementsByTagName('h3')[0];
-    question.textContent = '';
-    let ul = phrase.firstElementChild;
+    const question = document.getElementsByTagName('h3')[0];
+    question.parentNode.removeChild(question);
+    let ul = phrase.querySelector('ul');
     ul.innerHTML = '';
     const keyboard = document.getElementsByTagName('button');
     for (let i = 0; i < keyboard.length; i += 1) {
         let key = keyboard[i];
         if (key.className === 'chosen') {
             key.classList.remove('chosen');
+            key.removeAttribute('class');
+            key.removeAttribute('disabled');
         }
     }
+    const lostLives = document.getElementsByTagName('img');
+    for (let i = 0; i < lostLives.length; i += 1) {
+        let heart = lostLives[i];
+        if (heart.hasAttribute('src', 'images/lostHeart.png')) {
+            heart.setAttribute('src', 'images/liveHeart.png');
+        }
+    }
+    missed = 0;
+    addPhraseToDisplay(phraseArray);
 }
 
 // Check if player got the phrase correct
@@ -119,6 +135,3 @@ function checkWin() {
         reset();
     }
 }
-
-getRandomPhraseAsQuestion(phrases);
-addPhraseToDisplay(phrases);
