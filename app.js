@@ -1,12 +1,16 @@
-const qwerty = document.getElementById('qwerty');
-const phrase = document.getElementById('phrase');
-const ul = phrase.querySelector('ul')
-const startButton = document.getElementsByClassName('btn__reset');
+// Variables in order of appearance
 const overlay = document.getElementById('overlay');
+const startButton = document.getElementsByClassName('btn__reset');
 const heading = document.getElementById('banner');
+const phrase = document.getElementById('phrase');
+const ul = phrase.querySelector('ul');
+const qwerty = document.getElementById('qwerty');
 let lives = document.getElementsByTagName('img');
+
+// Player's life counter
 let missed = 0;
 
+// Phrases for the game
 const phrases = [
     ['Google Chrome, Safari and Firefox are types of what?', 'Web browsers'],
     ['What phrase describes best practice when coding?', 'Keep your code DRY'],
@@ -15,6 +19,7 @@ const phrases = [
     ['Where is the best place to learn front-end web development?', 'Treehouse']
 ]
 
+// Random number generator to store as parameter for both question and answer
 function getRandomNumber(arr) {
     return Math.floor(Math.random() * arr.length);
 }
@@ -29,7 +34,7 @@ overlay.addEventListener('click', (e) => {
     }
 });
 
-// Choose random array and display question
+// Choose random array and display question for phrase
 function getRandomPhraseAsQuestion(arr, questionNumber) {
     const question = arr[questionNumber][0];
     const questionHeading = document.createElement('h3');
@@ -37,7 +42,7 @@ function getRandomPhraseAsQuestion(arr, questionNumber) {
     heading.append(questionHeading);
 }
 
-// Choose random array and split into array of letters
+// Choose random array and split phrase into array of letters
 function getRandomPhraseAsArray(arr, questionNumber) {
     const splitPhrase = arr[questionNumber][1].split('');
     return splitPhrase;

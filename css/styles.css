@@ -82,11 +82,17 @@ button {
   height: 65px;
   width: 65px;
   padding: 20px 1px 0 1px;
-  margin-right: 2px;
-  margin-bottom: 2px;
+  margin-right: 4px;
+  margin-bottom: 4px;
   color: transparent;
   background: var(--color-neutral-light);
   border-radius: 5px;
+  -webkit-touch-callout: none; /* Prevents user from highlighting hidden text */
+  -webkit-user-select: none;
+  -khtml-user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+  user-select: none;
 }
 
 .space {
@@ -96,6 +102,8 @@ button {
 .show {
   color: #000;
   background-color: #76CE82;
+  transition: transform 0.5s ease;
+  transform: scale(1.05);
 }
 
 /* Keyboard */
